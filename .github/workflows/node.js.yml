@@ -17,17 +17,18 @@ jobs:
           node-version: '16.x'
 
       - uses: actions/checkout@v2
-      - working-directory: ./vue-todo
       
       - name: Install dependencies
+        working-directory: ./vue-todo
         run: npm install
         
       - name: Build
+        working-directory: ./vue-todo
         run: npm run build && npm run zip
     
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
           name: vue-todo-zip
-          path: ./build/*.zip
+          path: ./vue-todo/build/*.zip
     
