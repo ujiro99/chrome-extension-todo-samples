@@ -34,6 +34,7 @@ export default {
     let inputVal = ref("");
 
     const add = () => {
+      console.log("add: " + inputVal.value);
       todos.value = [
         ...todos.value,
         {
@@ -46,6 +47,7 @@ export default {
     };
 
     const check = (id) => {
+      console.log("check: " + id);
       const todo = todos.value.find((n) => n.id === id);
       if (todo) {
         todo.complete = !todo.complete;
