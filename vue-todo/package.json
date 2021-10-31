@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --mode production",
     "watch": "vue-cli-service build --mode production --watch",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "zip": "find . -name \".DS_Store\" -delete; cd dist; zip -r ../build/build-$(node -p -e \"require('../package.json').version\").zip ./"
   },
   "dependencies": {
     "core-js": "^3.6.5",
