@@ -65,35 +65,6 @@ export default {
 </script>
 
 <style scoped>
-@import "../css/checkbox.css";
-
-ul {
-  padding: 0;
-}
-
-li {
-  list-style: none;
-  display: flex;
-  font-size: 14px;
-}
-
-li + li {
-  padding-top: 8px;
-}
-
-.todo__input {
-  display: flex;
-}
-
-.todo__input input {
-  border: 1px solid #d1d5db;
-  padding: 6px 8px;
-  outline: none;
-  border-radius: 0.3em;
-}
-
-.todo__input-button {
-  color: rgb(44, 62, 80);
-  margin-left: 8px;
-}
+@import "../../../react-todo/src/checkbox.css";
+@import "../../../react-todo/src/todo.css";
 </style>

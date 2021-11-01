@@ -57,7 +57,7 @@
 .checkbox input[type="checkbox"]:checked + label:after {
   width: 10px;
   top: 12px;
-  left: 6px;
+  left: 7px;
   transform: rotate(305deg);
   transform-origin: 0% 0%;
   transition: width 150ms ease 50ms;
