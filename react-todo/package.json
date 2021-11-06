@@ -12,9 +12,9 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject",
     "zip": "find . -name \".DS_Store\" -delete; cd dist; zip -r ../build/react-$(node -p -e \"require('../package.json').version\").zip ./"
   },
@@ -37,7 +37,6 @@
     ]
   },
   "devDependencies": {
-    "customize-cra": "^1.0.0",
-    "react-app-rewired": "^2.1.8"
+    "@craco/craco": "^6.4.0"
   }
 }

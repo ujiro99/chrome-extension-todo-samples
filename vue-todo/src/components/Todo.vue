@@ -23,35 +23,46 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, reactive, toRaw, onMounted } from "vue";
+import { Storage } from "../storage";
+
+const TODO = "todo";
 
 let id = 0;
 
 export default {
   name: "Todo",
   setup() {
-    let todos = ref([]);
-    let inputVal = ref("");
+    const todos = reactive([]);
+    const inputVal = ref("");
+
+    onMounted(() => {
+      Storage.get(TODO).then((saved) => {
+        if (saved) {
+          todos.splice(0, 0, ...saved);
+          id = saved.reduce((acc, cur) => Math.max(acc, cur.id), 0) + 1;
+        }
+      });
+    });
 
     const add = () => {
       console.log("add: " + inputVal.value);
-      todos.value = [
-        ...todos.value,
-        {
-          id: id++,
-          title: inputVal.value,
-          complete: false,
-        },
-      ];
+      todos.push({
+        id: id++,
+        title: inputVal.value,
+        complete: false,
+      });
       inputVal.value = ""; // clear input field
+      Storage.set(TODO, toRaw(todos));
     };
 
     const check = (id) => {
       console.log("check: " + id);
-      const todo = todos.value.find((n) => n.id === id);
+      const todo = todos.find((n) => n.id === id);
       if (todo) {
         todo.complete = !todo.complete;
       }
+      Storage.set(TODO, toRaw(todos));
     };
 
     return {
