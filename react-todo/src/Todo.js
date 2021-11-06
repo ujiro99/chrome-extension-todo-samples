@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+import { Storage } from "./storage";
 
 import "./checkbox.css";
 import "./todo.css";
@@ -8,6 +10,15 @@ let id = 0;
 function Todo() {
   const [todos, setTodos] = useState([]);
   const [inputVal, setInpuVal] = useState("");
+
+  useEffect(() => {
+    Storage.get("todo").then((saved) => {
+      if (saved) {
+        setTodos(saved);
+        id = saved.reduce((acc, cur) => Math.max(acc, cur.id), 0) + 1
+      }
+    });
+  }, []); // run only once.
 
   const add = () => {
     console.log("add: " + inputVal);
@@ -21,6 +32,7 @@ function Todo() {
     ];
     setTodos(newTodos);
     setInpuVal(""); // clear input field
+    Storage.set("todo", newTodos);
   };
 
   const check = (e) => {
@@ -35,6 +47,7 @@ function Todo() {
       return todo;
     });
     setTodos(newTodos);
+    Storage.set("todo", newTodos);
   };
 
   return (

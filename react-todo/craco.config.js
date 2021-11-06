@@ -1,4 +1,11 @@
 module.exports = {
+  eslint: {
+    configure: {
+      globals: {
+        chrome: true,
+      },
+    },
+  },
   devServer: (devServerConfig) => {
     devServerConfig.writeToDisk = true;
     return devServerConfig;
