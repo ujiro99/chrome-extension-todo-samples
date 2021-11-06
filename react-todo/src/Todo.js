@@ -5,6 +5,8 @@ import { Storage } from "./storage";
 import "./checkbox.css";
 import "./todo.css";
 
+const TODO = "todo";
+
 let id = 0;
 
 function Todo() {
@@ -12,10 +14,10 @@ function Todo() {
   const [inputVal, setInpuVal] = useState("");
 
   useEffect(() => {
-    Storage.get("todo").then((saved) => {
+    Storage.get(TODO).then((saved) => {
       if (saved) {
         setTodos(saved);
-        id = saved.reduce((acc, cur) => Math.max(acc, cur.id), 0) + 1
+        id = saved.reduce((acc, cur) => Math.max(acc, cur.id), 0) + 1;
       }
     });
   }, []); // run only once.
@@ -32,7 +34,7 @@ function Todo() {
     ];
     setTodos(newTodos);
     setInpuVal(""); // clear input field
-    Storage.set("todo", newTodos);
+    Storage.set(TODO, newTodos);
   };
 
   const check = (e) => {
@@ -47,7 +49,7 @@ function Todo() {
       return todo;
     });
     setTodos(newTodos);
-    Storage.set("todo", newTodos);
+    Storage.set(TODO, newTodos);
   };
 
   return (

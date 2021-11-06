@@ -26,6 +26,8 @@
 import { ref, reactive, toRaw, onMounted } from "vue";
 import { Storage } from "../storage";
 
+const TODO = "todo";
+
 let id = 0;
 
 export default {
@@ -35,7 +37,7 @@ export default {
     const inputVal = ref("");
 
     onMounted(() => {
-      Storage.get("todo").then((saved) => {
+      Storage.get(TODO).then((saved) => {
         if (saved) {
           todos.splice(0, 0, ...saved);
           id = saved.reduce((acc, cur) => Math.max(acc, cur.id), 0) + 1;
@@ -51,7 +53,7 @@ export default {
         complete: false,
       });
       inputVal.value = ""; // clear input field
-      Storage.set("todo", toRaw(todos));
+      Storage.set(TODO, toRaw(todos));
     };
 
     const check = (id) => {
@@ -60,7 +62,7 @@ export default {
       if (todo) {
         todo.complete = !todo.complete;
       }
-      Storage.set("todo", toRaw(todos));
+      Storage.set(TODO, toRaw(todos));
     };
 
     return {
