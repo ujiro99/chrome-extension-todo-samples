@@ -14,6 +14,7 @@ function Todo() {
   const [inputVal, setInpuVal] = useState("");
 
   useEffect(() => {
+    chrome.runtime.sendMessage({ popupMounted: true });
     Storage.get(TODO).then((saved) => {
       if (saved) {
         setTodos(saved);

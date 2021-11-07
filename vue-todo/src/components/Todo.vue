@@ -37,6 +37,7 @@ export default {
     const inputVal = ref("");
 
     onMounted(() => {
+      chrome.runtime.sendMessage({ popupMounted: true });
       Storage.get(TODO).then((saved) => {
         if (saved) {
           todos.splice(0, 0, ...saved);
